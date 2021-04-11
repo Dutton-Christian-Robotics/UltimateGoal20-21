@@ -15,12 +15,13 @@ public class DefenderBotProperties extends Properties {
 		  File propertiesFile = new File(filename);
 		  InputStream propertiesStream = new FileInputStream(propertiesFile);
 		  loadFromXML(propertiesStream);
+		  System.out.println("Loaded properties file");
 	   } catch (FileNotFoundException ex) {
 		  System.out.println("Properties file not found");
-		  System.exit(-1);
+		  //System.exit(-1);
 	   } catch (IOException ex) {
 		  System.out.println("IOException while loading properties file");
-		  System.exit(-1);
+		  //System.exit(-1);
 
 	   }
     }

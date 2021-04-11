@@ -10,8 +10,7 @@ import java.util.ArrayList;
 public class DefenderBot {
 
     private HardwareMap hardwareMap;
-    private DefenderBotProperties properties;
-    private String propertiesPath;
+    private DefenderBotConfiguration configuration;
     public DefenderBotDrivetrain drivetrain;
     public DefenderBotSystem sensors;
     public DefenderBotSystem navigation;
@@ -19,14 +18,19 @@ public class DefenderBot {
     protected Telemetry telemetry;
 
 
-    DefenderBot(HardwareMap hm, String path, Telemetry t) {
-	   hardwareMap = hm;
-	   propertiesPath = path;
-	   properties = new DefenderBotProperties(propertiesPath);
-	   telemetry = t;
+    DefenderBot(HardwareMap hm, Class<?> configClass, Telemetry t) {
+        hardwareMap = hm;
 
-	   // In subclassess, use addSystem with the system class.
-	   // This will automatically pass along hardwaremap properties, and the bot instance
+        try {
+            configuration = (DefenderBotConfiguration) configClass.cast(configClass.getDeclaredConstructor().newInstance());
+        } catch (Exception e) {
+            t.addData("Error", "loading config");
+            t.update();
+        }
+        telemetry = t;
+
+        // In subclassess, use addSystem with the system class.
+        // This will automatically pass along hardwaremap properties, and the bot instance
 
 
     }
@@ -37,16 +41,16 @@ public class DefenderBot {
     // of double parameters. Those are collected in an array and passed along to the drivetrain's
     // drive method.
     public void drive(double... arr) {
-	   if (drivetrain != null) {
-		  drivetrain.drive(arr);
-	   }
+        if (drivetrain != null) {
+            drivetrain.drive(arr);
+        }
     }
 
     // This method is passed-through to the drivetrain, if one exists.
     public void stopDriving() {
-	   if (drivetrain != null) {
-		  drivetrain.stopDriving();
-	   }
+        if (drivetrain != null) {
+            drivetrain.stopDriving();
+        }
     }
 
     // This method uses generics in order to instantiate and add system classes to the bot. The
@@ -58,14 +62,19 @@ public class DefenderBot {
     // be assigned to specific instance variables.
 
     public <T extends DefenderBotSystem> T addSystem(Class<T> sc) {
-	   try {
-		  T system = sc.cast(sc.getConstructor(HardwareMap.class, DefenderBotProperties.class, DefenderBot.class).newInstance(hardwareMap, properties, this));
-		  systems.add(system);
-		  return system;
+        try {
+            T system = sc.cast(sc.getDeclaredConstructor(HardwareMap.class, DefenderBotConfiguration.class, DefenderBot.class).newInstance(hardwareMap, configuration, this));
+            systems.add(system);
+            return system;
 
-	   } catch (NoSuchMethodException|IllegalAccessException|InvocationTargetException|InstantiationException ex) {
-		  System.exit(-1);
-	   }
-	   return null;
+        } catch (NoSuchMethodException|IllegalAccessException|InvocationTargetException|InstantiationException ex) {
+            System.out.println("CRASH!");
+            System.out.println(ex.getClass().getCanonicalName());
+            System.out.println(ex.getMessage());
+            System.out.println(ex.getCause());
+
+            //System.exit(-1);
+        }
+        return null;
     }
 }
