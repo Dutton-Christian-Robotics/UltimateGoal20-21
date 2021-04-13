@@ -25,4 +25,10 @@ abstract class DefenderBotSystem {
     public void setLogging(boolean logging) {
         this.logging = logging;
     }
+
+    // A convenience method that can be called from any subsystem. Removes the need
+    // to have try/catch blocks muddying up code.
+    public void sleep(long milliseconds) {
+        bot.sleep(milliseconds);
+    }
 }

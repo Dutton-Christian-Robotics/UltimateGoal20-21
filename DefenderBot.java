@@ -10,11 +10,11 @@ import java.util.ArrayList;
 public class DefenderBot {
 
     private HardwareMap hardwareMap;
-    private DefenderBotConfiguration configuration;
+    protected DefenderBotConfiguration configuration;
     public DefenderBotDrivetrain drivetrain;
     public DefenderBotSystem sensors;
     public DefenderBotSystem navigation;
-    private ArrayList<DefenderBotSystem> systems = new ArrayList<DefenderBotSystem>();
+    protected ArrayList<DefenderBotSystem> systems = new ArrayList<DefenderBotSystem>();
     protected Telemetry telemetry;
 
 
@@ -76,5 +76,13 @@ public class DefenderBot {
             //System.exit(-1);
         }
         return null;
+    }
+
+    public void sleep(long milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (Exception e) {
+            //something should happen here
+        }
     }
 }
