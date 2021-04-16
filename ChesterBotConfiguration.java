@@ -3,58 +3,89 @@ package org.firstinspires.ftc.teamcode.dcs15815;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+import java.lang.reflect.Field;
+
 public class ChesterBotConfiguration extends DefenderBotConfiguration {
 
-    public String motor_shooter_name;
-    public String servo_pusher_name;
-    public DcMotorSimple.Direction shooter_direction;
-    public double shooter_power;
-    public Servo.Direction pusher_direction;
-    public double pusher_rest_position;
-    public double pusher_shoot_position;
-    public long sleep_after_spinup;
-    public long sleep_after_push;
-    public long sleep_after_reset;
+    public double DRIVETRAIN_POWER_MAX;
 
-    public String MOTOR_WOBBLE_ARM_NAME;
-    public String SERVO_WOBBLE_HAND_NAME;
-    public int WOBBLE_ARM_GRAB_POSITION;
-    public double WOBBLE_ARM_GRAB_POSITION_POWER;
-    public DcMotorSimple.Direction WOBBLE_ARM_DIRECTION;
-    public int WOBBLE_ARM_CARRY_POSITION;
-    public double WOBBLE_ARM_CARRY_POSITION_POWER;
+    public String SHOOTER_MOTOR_NAME;
+    public String PUSHER_SERVO_NAME;
+    public DcMotorSimple.Direction SHOOTER_MOTOR_DIRECTION;
+    public double SHOOTER_POWER_MAX;
+    public Servo.Direction PUSHER_SERVO_DIRECTION;
+    public double PUSHER_POSITION_REST;
+    public double PUSHER_POSITION_SHOOT;
+    public long SHOOTER_SLEEP_AFTER_SPINUP;
+    public long SHOOTER_SLEEP_AFTER_PUSH;
+    public long SHOOTER_SLEEP_AFTER_RESET;
 
-    public String servo_ramp_name;
+    public String WOBBLEARM_MOTOR_NAME;
+    public String WOBBLEHAND_SERVO_NAME;
+    public Servo.Direction WOBBLEHAND_SERVO_DIRECTION;
+    public int WOBBLEARM_POSITION_GRAB;
+    public double WOBBLEARM_POWER_GRAB;
+    public DcMotorSimple.Direction WOBBLEARM_MOTOR_DIRECTION;
+    public int WOBBLEARM_POSITION_CARRY;
+    public double WOBBLEARM_POWER_CARRY;
+    public double WOBBLEHAND_POSITION_GRAB;
+    public double WOBBLEHAND_POSITION_CARRY;
+
+
+    public String RAMP_SERVO_NAME;
+    public Servo.Direction RAMP_SERVO_DIRECTION;
+    public double RAMP_SERVO_POSITION_DOWN;
+    public String INTAKE_MOTOR_NAME;
+    public DcMotorSimple.Direction INTAKE_MOTOR_DIRECTION;
+    public double INTAKE_MOTOR_POWER_MAX;
 
 
     ChesterBotConfiguration() {
-	   motor_back_left_name = "back_left";
-	   motor_front_left_name = "front_left";
-	   motor_front_right_name = "front_right";
-	   motor_back_right_name = "back_right";
+	   super();
+	   DRIVETRAIN_BACKLEFT_MOTOR_NAME = "back_left";
+	   DRIVETRAIN_FRONTLEFT_MOTOR_NAME = "front_left";
+	   DRIVETRAIN_FRONTRIGHT_MOTOR_NAME = "front_right";
+	   DRIVETRAIN_BACKRIGHT_MOTOR_NAME = "back_right";
+	   DRIVETRAIN_POWER_MAX = 1.0;
 
-	   motor_shooter_name = "shooter";
-	   shooter_direction = DcMotorSimple.Direction.REVERSE;
-	   servo_pusher_name = "pusher";
-	   shooter_power = 1.0;
-	   pusher_rest_position = 0.1;
-	   pusher_direction = Servo.Direction.REVERSE;
-	   pusher_shoot_position = 0.5;
-	   sleep_after_push = 650;
-	   sleep_after_spinup = 1000;
-	   sleep_after_reset = 350;
+	   SHOOTER_MOTOR_NAME = "shooter";
+	   SHOOTER_MOTOR_DIRECTION = DcMotorSimple.Direction.FORWARD;
+	   SHOOTER_POWER_MAX = 1.0;
+	   SHOOTER_SLEEP_AFTER_PUSH = 650;
+	   SHOOTER_SLEEP_AFTER_SPINUP = 1000;
+	   SHOOTER_SLEEP_AFTER_RESET = 350;
 
-
-	   MOTOR_WOBBLE_ARM_NAME = "wobble_arm";
-	   SERVO_WOBBLE_HAND_NAME = "wobble_hand";
-	   WOBBLE_ARM_GRAB_POSITION = 70;
-	   WOBBLE_ARM_CARRY_POSITION = 0;
-	   WOBBLE_ARM_GRAB_POSITION_POWER = 1;
-	   WOBBLE_ARM_CARRY_POSITION_POWER = 0.5;
-	   WOBBLE_ARM_DIRECTION = DcMotorSimple.Direction.REVERSE;
+	   PUSHER_SERVO_NAME = "pusher";
+	   PUSHER_POSITION_REST = 0.6;
+	   PUSHER_SERVO_DIRECTION = Servo.Direction.REVERSE;
+	   PUSHER_POSITION_SHOOT = 0.1;
 
 
-	   servo_ramp_name = "ramp";
+	   WOBBLEARM_MOTOR_NAME = "wobble_arm";
+	   WOBBLEARM_POSITION_GRAB = 70;
+	   WOBBLEARM_POSITION_CARRY = 0;
+	   WOBBLEARM_POWER_GRAB = 1;
+	   WOBBLEARM_POWER_CARRY = 0.5;
+	   WOBBLEARM_MOTOR_DIRECTION = DcMotorSimple.Direction.REVERSE;
+
+	   WOBBLEHAND_SERVO_NAME = "wobble_hand";
+	   WOBBLEHAND_SERVO_DIRECTION = Servo.Direction.FORWARD;
+	   WOBBLEHAND_POSITION_GRAB = 0.1;
+	   WOBBLEHAND_POSITION_CARRY = 0.6;
+
+
+	   RAMP_SERVO_NAME = "ramp";
+	   RAMP_SERVO_DIRECTION = Servo.Direction.REVERSE;
+	   RAMP_SERVO_POSITION_DOWN = 0;
+
+	   INTAKE_MOTOR_NAME = "ramp";
+	   INTAKE_MOTOR_DIRECTION = DcMotorSimple.Direction.REVERSE;
+	   INTAKE_MOTOR_POWER_MAX = 1.0;
+
+	   for (Field f : ChesterBotConfiguration.class.getDeclaredFields()) {
+		  fieldHashtable.put(f.getName(), f);
+	   }
+
     }
 
 }
