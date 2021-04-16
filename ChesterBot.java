@@ -6,13 +6,15 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class ChesterBot extends DefenderBot {
     public ChesterBotShooter shooter;
     public ChesterBotWobbleArm wobbleArm;
+    public ChesterBotIntake intake;
     protected ChesterBotConfiguration configuration;
 
     ChesterBot(HardwareMap hm, Class<?> configClass, Telemetry t) {
-	   super(hm, configClass, t);
-	   drivetrain = addSystem(ChesterBotMecanumDrivetrain.class);
-	   shooter = addSystem(ChesterBotShooter.class);
-	   wobbleArm = addSystem(ChesterBotWobbleArm.class);
+        super(hm, configClass, t);
+        drivetrain = addSystem(ChesterBotMecanumDrivetrain.class);
+        shooter = addSystem(ChesterBotShooter.class);
+        wobbleArm = addSystem(ChesterBotWobbleArm.class);
+        intake = addSystem(ChesterBotIntake.class);
 
     }
 }
