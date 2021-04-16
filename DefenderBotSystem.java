@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.dcs15815;
 
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 abstract class DefenderBotSystem {
     protected HardwareMap hardwareMap;
@@ -31,4 +33,32 @@ abstract class DefenderBotSystem {
     public void sleep(long milliseconds) {
         bot.sleep(milliseconds);
     }
+
+    public void sleep(String configKey) { sleep(configLong(configKey)); }
+
+    public String configString(String key) {
+        return configuration.getString(key);
+    }
+
+    public double configDouble(String key) {
+        return configuration.getDouble(key);
+    }
+
+    public int configInt(String key) {
+        return configuration.getInt(key);
+    }
+
+    public long configLong(String key) {
+        return configuration.getLong(key);
+    }
+
+    public Servo.Direction configServoDirection(String key) {
+        return (Servo.Direction) configuration.get(key);
+    }
+
+    public DcMotorSimple.Direction configMotorDirection(String key) {
+        return (DcMotorSimple.Direction) configuration.get(key);
+    }
+
+
 }
