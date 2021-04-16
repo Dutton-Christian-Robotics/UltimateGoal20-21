@@ -8,17 +8,18 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class ChesterBotMecanumDrivetrain extends DefenderBotDrivetrain {
 
     public DcMotor backLeft, frontLeft, frontRight, backRight;
-    private final double maxPower = 1.0;
 
 
     ChesterBotMecanumDrivetrain(HardwareMap hm, DefenderBotConfiguration config, DefenderBot b) {
 	   super(hm, config, b);
 
 	   //System.out.println("MOTOR: " + config.motor_back_left_name);
-	   backLeft = hm.dcMotor.get(config.motor_back_left_name);
-	   frontLeft = hm.dcMotor.get(config.motor_front_left_name);
-	   frontRight = hm.dcMotor.get(config.motor_front_right_name);
-	   backRight = hm.dcMotor.get(config.motor_back_right_name);
+	   backLeft = hm.dcMotor.get(configString("DRIVETRAIN_BACKLEFT_MOTOR_NAME"));
+	   frontLeft = hm.dcMotor.get(configString("DRIVETRAIN_FRONTLEFT_MOTOR_NAME"));
+	   frontRight = hm.dcMotor.get(configString("DRIVETRAIN_FRONTRIGHT_MOTOR_NAME"));
+	   backRight = hm.dcMotor.get(configString("DRIVETRAIN_BACKRIGHT_MOTOR_NAME"));
+
+	   backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     public void setPower(double bl, double fl, double fr, double br) {
@@ -45,7 +46,7 @@ public class ChesterBotMecanumDrivetrain extends DefenderBotDrivetrain {
     }
 
     private void setProportionalPower(double bl, double fl, double fr, double br) {
-	   double largest = maxPower;
+	   double largest = configDouble("DRIVETRAIN_POWER_MAX");
 	   largest = Math.max(largest, Math.abs(bl));
 	   largest = Math.max(largest, Math.abs(fl));
 	   largest = Math.max(largest, Math.abs(fr));
@@ -67,8 +68,8 @@ public class ChesterBotMecanumDrivetrain extends DefenderBotDrivetrain {
     }
 
     public void drive(double forward, double strafe, double rotate) {
-	   setMotorDirection(DcMotorSimple.Direction.REVERSE, DcMotorSimple.Direction.REVERSE,
-			 DcMotorSimple.Direction.FORWARD, DcMotorSimple.Direction.FORWARD);
+	   setMotorDirection(DcMotorSimple.Direction.FORWARD, DcMotorSimple.Direction.FORWARD,
+			 DcMotorSimple.Direction.REVERSE, DcMotorSimple.Direction.REVERSE);
 
 	   double backLeftPower = forward - strafe + rotate;
 	   double frontLeftPower = forward + strafe + rotate;
