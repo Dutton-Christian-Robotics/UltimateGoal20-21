@@ -32,12 +32,16 @@ public class ChesterBotShooter extends DefenderBotSystem {
 	   shooter.setPower(0);
     }
 
-    public void shoot() {
+    public void shoot(double ratio) {
 	   if (!shooter.isBusy()) {
 		  startShooter();
 	   }
 	   pushRing();
 	   resetPusher();
+    }
+
+    public void shoot() {
+	   shoot(1);
     }
 
     public void resetPusher() {

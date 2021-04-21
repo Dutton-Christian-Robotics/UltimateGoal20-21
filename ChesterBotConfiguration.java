@@ -49,15 +49,15 @@ public class ChesterBotConfiguration extends DefenderBotConfiguration {
 	   DRIVETRAIN_POWER_MAX = 1.0;
 
 	   SHOOTER_MOTOR_NAME = "shooter";
-	   SHOOTER_MOTOR_DIRECTION = DcMotorSimple.Direction.FORWARD;
-	   SHOOTER_POWER_MAX = 1.0;
+	   SHOOTER_MOTOR_DIRECTION = DcMotorSimple.Direction.REVERSE;
+	   SHOOTER_POWER_MAX = 1;
 	   SHOOTER_SLEEP_AFTER_PUSH = 650;
 	   SHOOTER_SLEEP_AFTER_SPINUP = 1000;
 	   SHOOTER_SLEEP_AFTER_RESET = 350;
 
 	   PUSHER_SERVO_NAME = "pusher";
 	   PUSHER_POSITION_REST = 0.6;
-	   PUSHER_SERVO_DIRECTION = Servo.Direction.REVERSE;
+	   PUSHER_SERVO_DIRECTION = Servo.Direction.FORWARD;
 	   PUSHER_POSITION_SHOOT = 0.1;
 
 
