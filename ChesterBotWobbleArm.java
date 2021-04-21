@@ -39,7 +39,7 @@ public class ChesterBotWobbleArm extends DefenderBotSystem {
     }
 
     public void moveHandToCarryPosition() {
-        hand.setPosition(1);
+        hand.setPosition(configDouble("WOBBLEHAND_POSITION_CARRY"));
     }
 
     public void moveToGrabPosition() {
