@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.dcs15815;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+
 import java.lang.reflect.Field;
 
 public class ChesterBotConfiguration extends DefenderBotConfiguration {
@@ -39,6 +41,9 @@ public class ChesterBotConfiguration extends DefenderBotConfiguration {
     public DcMotorSimple.Direction INTAKE_MOTOR_DIRECTION;
     public double INTAKE_MOTOR_POWER_MAX;
 
+    public String IMU_SENSOR_NAME;
+    public AxesOrder IMU_AXES_ORDER;
+
 
     ChesterBotConfiguration() {
 	   super();
@@ -66,7 +71,7 @@ public class ChesterBotConfiguration extends DefenderBotConfiguration {
 	   WOBBLEARM_POSITION_CARRY = 0;
 	   WOBBLEARM_POWER_GRAB = 1;
 	   WOBBLEARM_POWER_CARRY = 0.5;
-	   WOBBLEARM_MOTOR_DIRECTION = DcMotorSimple.Direction.REVERSE;
+	   WOBBLEARM_MOTOR_DIRECTION = DcMotorSimple.Direction.FORWARD;
 
 	   WOBBLEHAND_SERVO_NAME = "wobble_hand";
 	   WOBBLEHAND_SERVO_DIRECTION = Servo.Direction.FORWARD;
@@ -81,6 +86,9 @@ public class ChesterBotConfiguration extends DefenderBotConfiguration {
 	   INTAKE_MOTOR_NAME = "ramp";
 	   INTAKE_MOTOR_DIRECTION = DcMotorSimple.Direction.REVERSE;
 	   INTAKE_MOTOR_POWER_MAX = 1.0;
+
+	   IMU_SENSOR_NAME = "imu";
+	   IMU_AXES_ORDER = AxesOrder.ZYX;
 
 	   for (Field f : ChesterBotConfiguration.class.getDeclaredFields()) {
 		  fieldHashtable.put(f.getName(), f);
