@@ -15,7 +15,7 @@ public class DefenderBot {
     public DefenderBotSystem sensors;
     public DefenderBotSystem navigation;
     protected ArrayList<DefenderBotSystem> systems = new ArrayList<DefenderBotSystem>();
-    protected Telemetry telemetry;
+    public Telemetry telemetry;
 
 
     DefenderBot(HardwareMap hm, Class<?> configClass, Telemetry t) {
@@ -57,7 +57,7 @@ public class DefenderBot {
     // method works by being called with the class object for a DefenderBotSystem child class.
     // The method then uses the reflection API to find the constructor for the class that can be
     // called with a hardwaremap, a properties file, and a bot instance. It then calls that constructor
-    // with the required paramers. The resulting object is explicitly cast to the desired system
+    // with the required params. The resulting object is explicitly cast to the desired system
     // class. This is added to the bot's array of systems, and the object returned so that it can
     // be assigned to specific instance variables.
 
