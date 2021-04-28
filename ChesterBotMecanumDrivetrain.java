@@ -19,7 +19,9 @@ public class ChesterBotMecanumDrivetrain extends DefenderBotDrivetrain {
 	   frontRight = hm.dcMotor.get(configString("DRIVETRAIN_FRONTRIGHT_MOTOR_NAME"));
 	   backRight = hm.dcMotor.get(configString("DRIVETRAIN_BACKRIGHT_MOTOR_NAME"));
 
-	   backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+
     }
 
     public void setPower(double bl, double fl, double fr, double br) {

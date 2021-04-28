@@ -34,15 +34,27 @@ public class ChesterBotConfiguration extends DefenderBotConfiguration {
     public double WOBBLEHAND_POSITION_CARRY;
 
 
-    public String RAMP_SERVO_NAME;
-    public Servo.Direction RAMP_SERVO_DIRECTION;
-    public double RAMP_SERVO_POSITION_DOWN;
+    public String RAMP_MOTOR_NAME;
+    public DcMotorSimple.Direction RAMP_MOTOR_DIRECTION;
+    public double RAMP_MOTOR_POSITION_DOWN;
+    public double RAMP_MOTOR_POSITION_UP;
     public String INTAKE_MOTOR_NAME;
     public DcMotorSimple.Direction INTAKE_MOTOR_DIRECTION;
     public double INTAKE_MOTOR_POWER_MAX;
 
     public String IMU_SENSOR_NAME;
     public AxesOrder IMU_AXES_ORDER;
+
+    public double NAVIGATION_POWER_DEFAULT;
+    public long NAVIGATION_TIMEOUT_DEFAULT;
+    public double NAVIGATION_TOLERANCE_DEFAULT;
+    public double NAVIGATION_GEAR_RATIO;
+    public long NAVIGATION_TICKS_PER_ROTATION;
+    public double NAVIGATION_WHEEL_RADIUS;
+    public double NAVIGATION_INCHES_PER_TICK;
+
+    public String VISION_TFOD_MODEL_ASSET;
+    public String VISION_VUFORIA_KEY;
 
 
     ChesterBotConfiguration() {
@@ -79,16 +91,30 @@ public class ChesterBotConfiguration extends DefenderBotConfiguration {
 	   WOBBLEHAND_POSITION_CARRY = 0.6;
 
 
-	   RAMP_SERVO_NAME = "ramp";
-	   RAMP_SERVO_DIRECTION = Servo.Direction.REVERSE;
-	   RAMP_SERVO_POSITION_DOWN = 0;
+	   RAMP_MOTOR_NAME = "ramp";
+	   RAMP_MOTOR_DIRECTION = DcMotorSimple.Direction.REVERSE;
+	   RAMP_MOTOR_POSITION_UP = 0;
+	   RAMP_MOTOR_POSITION_DOWN = 0;
 
-	   INTAKE_MOTOR_NAME = "ramp";
+	   INTAKE_MOTOR_NAME = "intake";
 	   INTAKE_MOTOR_DIRECTION = DcMotorSimple.Direction.REVERSE;
 	   INTAKE_MOTOR_POWER_MAX = 1.0;
 
 	   IMU_SENSOR_NAME = "imu";
-	   IMU_AXES_ORDER = AxesOrder.ZYX;
+	   IMU_AXES_ORDER = AxesOrder.XYZ;
+
+	   NAVIGATION_POWER_DEFAULT = 0.42;
+	   NAVIGATION_TIMEOUT_DEFAULT = 10000;
+	   NAVIGATION_TOLERANCE_DEFAULT = 0.3;
+
+	   NAVIGATION_GEAR_RATIO = 0.26; //is this right?
+	   NAVIGATION_TICKS_PER_ROTATION = 280;
+	   NAVIGATION_WHEEL_RADIUS = 2; // 4 inches diameter
+	   NAVIGATION_INCHES_PER_TICK = (2 * Math.PI * NAVIGATION_GEAR_RATIO * NAVIGATION_WHEEL_RADIUS) / NAVIGATION_TICKS_PER_ROTATION;;
+
+	   VISION_TFOD_MODEL_ASSET = "UltimateGoal.tflite";
+	   VISION_VUFORIA_KEY = "";
+
 
 	   for (Field f : ChesterBotConfiguration.class.getDeclaredFields()) {
 		  fieldHashtable.put(f.getName(), f);

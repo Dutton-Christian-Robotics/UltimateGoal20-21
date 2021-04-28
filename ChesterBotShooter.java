@@ -24,6 +24,10 @@ public class ChesterBotShooter extends DefenderBotSystem {
 	   sleep("SHOOTER_SLEEP_AFTER_SPINUP");
     }
 
+    public boolean isShooting() {
+	   return shooter.getPower() != 0;
+    }
+
     public void startShooter() {
 	   startShooter(1);
     }
