@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@TeleOp(name = "DriverTest", group = "Testing")
-public class DriverTest extends LinearOpMode
+@TeleOp(name = "Driver Test", group = "Testing")
+public class DriverTestOpMode extends LinearOpMode
 {
 	ChesterBot bot;
 	boolean isShooting = false;

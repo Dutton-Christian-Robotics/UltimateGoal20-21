@@ -4,6 +4,13 @@ import java.util.*;
 
 import static java.lang.System.exit;
 
+// This class is not actually used. The original plan was to use Java's
+// built-in property functionality, but I couldn't get it to properly find
+// the properties file on the bot. I think it comes from not knowing what
+// the active directory is when an opmode runs.
+//
+// So, I reused the class-based configuration used during Skystone,
+// with modifications for ease of use.
 
 public class DefenderBotProperties extends Properties {
 
