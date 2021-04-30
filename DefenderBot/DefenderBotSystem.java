@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+
 abstract class DefenderBotSystem {
     protected HardwareMap hardwareMap;
     protected DefenderBotConfiguration configuration;
@@ -34,6 +36,7 @@ abstract class DefenderBotSystem {
         bot.sleep(milliseconds);
     }
 
+    // This version of sleep can be called with a configuration key
     public void sleep(String configKey) { sleep(configLong(configKey)); }
 
     public String configString(String key) {
@@ -43,6 +46,7 @@ abstract class DefenderBotSystem {
     public double configDouble(String key) {
         return configuration.getDouble(key);
     }
+
 
     public int configInt(String key) {
         return configuration.getInt(key);
@@ -58,6 +62,10 @@ abstract class DefenderBotSystem {
 
     public DcMotorSimple.Direction configMotorDirection(String key) {
         return (DcMotorSimple.Direction) configuration.get(key);
+    }
+
+    public AxesOrder configAxesOrder(String key) {
+        return (AxesOrder) configuration.get(key);
     }
 
 
