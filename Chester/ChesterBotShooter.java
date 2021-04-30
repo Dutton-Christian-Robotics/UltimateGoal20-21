@@ -8,6 +8,7 @@ public class ChesterBotShooter extends DefenderBotSystem {
 
     public DcMotor shooter;
     public Servo pusher;
+    public double currentShooterPower;
 
     ChesterBotShooter(HardwareMap hm, DefenderBotConfiguration config, DefenderBot b) {
 	   super(hm, config, b);
@@ -19,8 +20,21 @@ public class ChesterBotShooter extends DefenderBotSystem {
 	   pusher.setDirection(configServoDirection("PUSHER_SERVO_DIRECTION"));
     }
 
+    public void setShooterPower(double p) {
+	   currentShooterPower = p;
+	   shooter.setPower(currentShooterPower);
+    }
+
+    public void setShooterPowerByRatio(double r) {
+	   setShooterPower(r * configDouble("SHOOTER_POWER_MAX"));
+    }
+
+    public double getCurrentShooterPower() {
+	   return currentShooterPower;
+    }
+
     public void startShooter(double ratio) {
-	   shooter.setPower(ratio * configDouble("SHOOTER_POWER_MAX"));
+	   setShooterPowerByRatio(ratio);
 	   sleep("SHOOTER_SLEEP_AFTER_SPINUP");
     }
 
@@ -33,12 +47,13 @@ public class ChesterBotShooter extends DefenderBotSystem {
     }
 
     public void stopShooter() {
-	   shooter.setPower(0);
+	   setShooterPower(0);
     }
 
+    // Note that the ratio is only used if the shooter is not already powered up.
     public void shoot(double ratio) {
 	   if (!shooter.isBusy()) {
-		  startShooter();
+		  startShooter(ratio);
 	   }
 	   pushRing();
 	   resetPusher();
