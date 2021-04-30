@@ -16,6 +16,10 @@ public class ChesterBotIntake extends DefenderBotSystem {
 
         rampMotor = hm.dcMotor.get(configString("RAMP_MOTOR_NAME"));
         rampMotor.setDirection(configMotorDirection("RAMP_MOTOR_DIRECTION"));
+        rampMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rampMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+
+
     }
 
     public void capture(double ratio) {
@@ -39,7 +43,8 @@ public class ChesterBotIntake extends DefenderBotSystem {
     }
 
     public void lowerRamp() {
-//        rampMotor.setPosition(configDouble("RAMP_SERVO_POSITION_DOWN"));
+        rampMotor.setTargetPosition(configInt("RAMP_SERVO_POSITION_DOWN"));
+        rampMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
 }
