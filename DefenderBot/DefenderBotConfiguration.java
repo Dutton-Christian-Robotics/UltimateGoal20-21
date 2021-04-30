@@ -53,6 +53,16 @@ abstract class DefenderBotConfiguration {
 		  return -1;
 	   }
     }
+//
+//    public double getDoubleArray(String key) {
+//        Field f = fieldHashtable.get(key);
+//        try {
+//            return f.get(this);
+//        } catch (Exception e) {
+//            return -1;
+//        }
+//    }
+
 
     public long getLong(String key) {
 	   Field f = fieldHashtable.get(key);
@@ -62,4 +72,5 @@ abstract class DefenderBotConfiguration {
 		  return -1;
 	   }
     }
+
 }
