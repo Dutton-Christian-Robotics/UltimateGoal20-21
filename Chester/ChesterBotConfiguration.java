@@ -15,6 +15,7 @@ public class ChesterBotConfiguration extends DefenderBotConfiguration {
     public String PUSHER_SERVO_NAME;
     public DcMotorSimple.Direction SHOOTER_MOTOR_DIRECTION;
     public double SHOOTER_POWER_MAX;
+    public double[] SHOOTER_POWER_LEVELS;
     public Servo.Direction PUSHER_SERVO_DIRECTION;
     public double PUSHER_POSITION_REST;
     public double PUSHER_POSITION_SHOOT;
@@ -68,7 +69,8 @@ public class ChesterBotConfiguration extends DefenderBotConfiguration {
 	   SHOOTER_MOTOR_NAME = "shooter";
 	   SHOOTER_MOTOR_DIRECTION = DcMotorSimple.Direction.REVERSE;
 	   SHOOTER_POWER_MAX = 1;
-	   SHOOTER_SLEEP_AFTER_PUSH = 650;
+	   SHOOTER_POWER_LEVELS = new double[]{1, 0.75, 0.65, 0.55};
+	   SHOOTER_SLEEP_AFTER_PUSH = 450;
 	   SHOOTER_SLEEP_AFTER_SPINUP = 1000;
 	   SHOOTER_SLEEP_AFTER_RESET = 350;
 
@@ -94,11 +96,11 @@ public class ChesterBotConfiguration extends DefenderBotConfiguration {
 	   RAMP_MOTOR_NAME = "ramp";
 	   RAMP_MOTOR_DIRECTION = DcMotorSimple.Direction.REVERSE;
 	   RAMP_MOTOR_POSITION_UP = 0;
-	   RAMP_MOTOR_POSITION_DOWN = 0;
+	   RAMP_MOTOR_POSITION_DOWN = 100;
 
 	   INTAKE_MOTOR_NAME = "intake";
-	   INTAKE_MOTOR_DIRECTION = DcMotorSimple.Direction.REVERSE;
-	   INTAKE_MOTOR_POWER_MAX = 1.0;
+	   INTAKE_MOTOR_DIRECTION = DcMotorSimple.Direction.FORWARD;
+	   INTAKE_MOTOR_POWER_MAX = 1;
 
 	   IMU_SENSOR_NAME = "imu";
 	   IMU_AXES_ORDER = AxesOrder.XYZ;
