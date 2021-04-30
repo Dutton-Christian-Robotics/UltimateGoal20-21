@@ -18,6 +18,7 @@ public class ChesterBotWobbleArm extends DefenderBotSystem {
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+
     }
 
     public void moveArmToGrabPosition() {
