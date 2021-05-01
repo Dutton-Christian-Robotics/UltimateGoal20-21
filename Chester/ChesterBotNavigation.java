@@ -137,7 +137,8 @@ public class ChesterBotNavigation extends DefenderBotSystem {
 	   double rotation = 0;
 	   double averageError = 0;
 
-	   while ((Math.abs(y - d[0]) > 1.5) || (Math.abs(x - d[1]) > 1.5) || (Math.abs(heading - h) > 1.5)) {
+	   // should replace these constants with config values
+	   while ((Math.abs(y - d[0]) > 1.0) || (Math.abs(x - d[1]) > 1.0) || (Math.abs(heading - h) > 1.0)) {
 		  deltaX = x - d[1];
 		  deltaY = y - d[0];
 		  deltaH = h - heading;
@@ -146,7 +147,7 @@ public class ChesterBotNavigation extends DefenderBotSystem {
 		  bot.telemetry.addData("y", deltaY);
 		  bot.telemetry.addData("h", deltaH);
 		  bot.telemetry.update();
-		  sleep(15000);
+
 
 
 

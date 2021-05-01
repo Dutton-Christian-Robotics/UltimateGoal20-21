@@ -9,6 +9,9 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import java.util.LinkedList;
 import java.util.concurrent.Callable;
 
+// Attempt to move and shoot autonomously using timing.
+
+@Disabled
 @Autonomous(name = "Autonomous 2", group = "Game")
 public class Autonomous2OpMode extends LinearOpMode
 {

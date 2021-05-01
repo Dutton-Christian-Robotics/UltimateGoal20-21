@@ -9,8 +9,11 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import java.util.LinkedList;
 import java.util.concurrent.Callable;
 
-@Autonomous(name = "Autonomous 1", group = "Game")
-public class Autonomous1OpMode extends LinearOpMode
+// Unfinished; was an attempt to shoot at the powershot goals
+
+@Disabled
+@Autonomous(name = "PowerShots", group = "Game")
+public class Autonomous4OpMode extends LinearOpMode
 {
     ChesterBot bot;
     boolean isFinished = false;
@@ -23,24 +26,19 @@ public class Autonomous1OpMode extends LinearOpMode
 
 	   waitForStart();
 	   while (opModeIsActive() && !isFinished) {
-		  bot.drive(0.3, 0, 0);
-		  sleep(11000);
-		  bot.drivetrain.stopDriving();
-		  bot.drive(0, 0.5, 0);
-		  sleep(800);
+		  bot.navigation.driveToPosition(-12, 0);
+		  bot.navigation.driveToPosition(0, 66);
 		  bot.shooter.startShooter(0.75);
-
 		  bot.navigation.comeToHeading(180);
-		  for (int i = 0; i < 8; i++) {
+		  for (int i = 0; i < 6; i++) {
 			 bot.shooter.shoot();
-			 sleep(1800);
+			 sleep(400);
 		  }
-
 		  bot.shooter.stopShooter();
-		  sleep(2000);
-		  bot.drive(-1,0,0);
-		  sleep(1000);
-		  bot.stopDriving();
+		  bot.navigation.comeToHeading(0);
+		  bot.navigation.driveToPosition(17, 76);
+
+
 		  isFinished = true;
 	   }
 
