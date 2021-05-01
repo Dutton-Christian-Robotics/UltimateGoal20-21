@@ -2,16 +2,8 @@ package org.firstinspires.ftc.teamcode.dcs15815;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.matrices.GeneralMatrixF;
 import org.firstinspires.ftc.robotcore.external.matrices.MatrixF;
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class ChesterBotNavigation extends DefenderBotSystem {
@@ -99,7 +91,7 @@ public class ChesterBotNavigation extends DefenderBotSystem {
     }
 
     public void comeToHeading(double angle) {
-	   comeToHeading(angle, configDouble("NAVIGATION_POWER_DEFAULT"), configDouble("NAVIGATION_TOLERANCE_DEFAULT"), configLong("NAVIGATION_TIMEOUT_DEFAULT"));
+	   comeToHeading(angle, configDouble("NAVIGATION_POWER_DEFAULT"), configDouble("NAVIGATION_TOLERANCE_ROTATION"), configLong("NAVIGATION_TIMEOUT_DEFAULT"));
     }
 
     double[] getDistanceInches() {
@@ -138,15 +130,15 @@ public class ChesterBotNavigation extends DefenderBotSystem {
 	   double averageError = 0;
 
 	   // should replace these constants with config values
-	   while ((Math.abs(y - d[0]) > 1.0) || (Math.abs(x - d[1]) > 1.0) || (Math.abs(heading - h) > 1.0)) {
+	   while ((Math.abs(y - d[0]) > configDouble("NAVIGATION_TOLERANCE_Y")) || (Math.abs(x - d[1]) > configDouble("NAVIGATION_TOLERANCE_X")) || (Math.abs(heading - h) > configDouble("NAVIGATION_TOLERANCE_ROTATION"))) {
 		  deltaX = x - d[1];
 		  deltaY = y - d[0];
 		  deltaH = h - heading;
 
-		  bot.telemetry.addData("x", deltaX);
-		  bot.telemetry.addData("y", deltaY);
-		  bot.telemetry.addData("h", deltaH);
-		  bot.telemetry.update();
+//            bot.telemetry.addData("x", deltaX);
+//            bot.telemetry.addData("y", deltaY);
+//            bot.telemetry.addData("h", deltaH);
+//            bot.telemetry.update();
 
 
 
@@ -159,7 +151,7 @@ public class ChesterBotNavigation extends DefenderBotSystem {
 
 
 		  averageError = (Math.abs(deltaX) + Math.abs(deltaY) + Math.abs(deltaH)) / 3;
-		  bot.telemetry.addData("Avg", averageError);
+//            bot.telemetry.addData("Avg", averageError);
 //            pX = powerDropoff(x, d[1]);
 //            pY = powerDropoff(y, d[0]);
 //            pH = powerDropoff(heading, h);
@@ -171,14 +163,14 @@ public class ChesterBotNavigation extends DefenderBotSystem {
 		  pY = (deltaY / averageError);
 		  pH = (deltaH / averageError);
 
-		  bot.telemetry.addData("px", pX);
-		  bot.telemetry.addData("py", pY);
-		  bot.telemetry.addData("ph", pH);
+//            bot.telemetry.addData("px", pX);
+//            bot.telemetry.addData("py", pY);
+//            bot.telemetry.addData("ph", pH);
 
 
-		  bot.telemetry.update();
-		  bot.drive(powerDropoff(y, d[0]), powerDropoff(x, d[1]), 0);
-//            bot.drive(pY, pX, pH);
+//            bot.telemetry.update();
+//            bot.drive(powerDropoff(y, d[0]), powerDropoff(x, d[1]), 0);
+		  bot.drive(pY, pX, pH);
 		  d = getDistanceInches();
 		  h = sensors.getIntegratedHeading();
 	   }
@@ -188,6 +180,19 @@ public class ChesterBotNavigation extends DefenderBotSystem {
 
     public void driveToPosition(double x, double y) {
 	   driveToPosition(x, y, 0.0);
+    }
+
+    public void driveToPosition(DefenderBotPosition position) {
+	   driveToPosition(position.getX(), position.getY(), position.getHeading());
+    }
+
+    public DefenderBotPosition getCurrentPosition() {
+	   double[] d = getDistanceInches();
+	   return new DefenderBotPosition(d[1], d[0], sensors.getIntegratedHeading());
+    }
+
+    public void driveToRelativePosition(double dX, double dY) {
+	   driveToPosition(getCurrentPosition().relativePosition(dX, dY));
     }
 
 

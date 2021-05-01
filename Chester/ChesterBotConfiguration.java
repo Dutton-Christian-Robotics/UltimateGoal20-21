@@ -48,7 +48,9 @@ public class ChesterBotConfiguration extends DefenderBotConfiguration {
 
     public double NAVIGATION_POWER_DEFAULT;
     public long NAVIGATION_TIMEOUT_DEFAULT;
-    public double NAVIGATION_TOLERANCE_DEFAULT;
+    public double NAVIGATION_TOLERANCE_ROTATION;
+    public double NAVIGATION_TOLERANCE_X;
+    public double NAVIGATION_TOLERANCE_Y;
     public double NAVIGATION_GEAR_RATIO;
     public long NAVIGATION_TICKS_PER_ROTATION;
     public double NAVIGATION_WHEEL_RADIUS;
@@ -107,7 +109,9 @@ public class ChesterBotConfiguration extends DefenderBotConfiguration {
 
 	   NAVIGATION_POWER_DEFAULT = 0.42;
 	   NAVIGATION_TIMEOUT_DEFAULT = 10000;
-	   NAVIGATION_TOLERANCE_DEFAULT = 0.3;
+	   NAVIGATION_TOLERANCE_ROTATION = 0.3;
+	   NAVIGATION_TOLERANCE_X = 1.0;
+	   NAVIGATION_TOLERANCE_Y = 1.0;
 
 	   NAVIGATION_GEAR_RATIO = 0.26; //is this right?
 	   NAVIGATION_TICKS_PER_ROTATION = 280;
